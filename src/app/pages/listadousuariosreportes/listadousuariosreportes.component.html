@@ -1,0 +1,301 @@
+<!-- component -->
+<div class="p-6 space-y-4 bg-gray-100 rounded-lg shadow-lg">
+  <p-toolbar class="bg-orange-500">
+    <h1 class="text-gray-500">Listado de Usuarios</h1>
+  </p-toolbar>
+  <p-table
+    styleClass="p-datatable-gridlines"
+    sortMode="multiple"
+    [value]="listaUsuarioService.usuarios()"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="10"
+    [rowHover]="true"
+    dataKey="codigo"
+    [paginator]="false"
+    [scrollable]="true"
+    [rows]="100"
+    scrollHeight="1000px"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Id
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Usuario
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Correo
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Forma
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Ubicacion
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Editar
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          Eliminar
+        </th>
+      </tr>
+      <tr>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+        >
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="id"
+            [showClearButton]="false"
+          />
+        </th>
+
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+        >
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="usuario"
+            [showClearButton]="false"
+          />
+        </th>
+
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+        >
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="correo"
+            [showClearButton]="false"
+          />
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+        >
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="forma"
+            [showClearButton]="false"
+          />
+        </th>
+        <th
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+        >
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="ubicacion"
+            [showClearButton]="false"
+          />
+        </th>
+
+        <th></th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuarios>
+      <tr>
+        <td
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          {{ usuarios.id }}
+        </td>
+        <td
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          {{ usuarios.usuario }}
+        </td>
+        <td
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'justify-left', 'font-size': '0.80em' }"
+        >
+          {{ usuarios.correo }}
+        </td>
+        <td
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          {{ usuarios.forma }}
+        </td>
+        <td
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          {{ usuarios.ubicacion }}
+        </td>
+
+        <td
+          (click)="
+            openAddDialog(
+              usuarios.id,
+              usuarios.usuario,
+              usuarios.correo,
+              usuarios.forma,
+              usuarios.ubicacion
+            )
+          "
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          <i class="pi pi-plus"></i>
+        </td>
+        <td
+          (click)="borrarReporte(usuarios.id)"
+          class="text-black border-2 border-gray-100 border-solid"
+          [style]="{ 'text-align': 'center', 'font-size': '0.80em' }"
+        >
+          <i class="pi pi-trash"></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-dialog
+    header="Editar Operador"
+    [(visible)]="visibleAddDialog"
+    [style]="{ width: '50vw' }"
+  >
+    <div class="grid p-fluid formgrid">
+      <div class="field col-12 md:col-4">
+
+      </div>
+      <div class="field col-12 md:col-4">
+        <label for="id">Id</label>
+        <input
+          id="id"
+          type="text"
+          [value]="selectedUsuario.id"
+          disabled
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        />
+      </div>
+      <div class="field col-12 md:col-4">
+
+        @if( habilitaStatus()) {
+        <label for="usuario">Usuario Editar</label>
+        <input
+          id="usuario"
+          type="text"
+          enabled
+          tooltip="Usuarios"
+          tooltipPosition="top"
+          [(ngModel)]="selectedUsuario.usuario"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        />
+        } @else {
+        <label for="usuario">Usuario</label>
+        <input
+          id="usuario"
+          type="text"
+          tooltip="Usuario"
+          tooltipPosition="top"
+          [(ngModel)]="selectedUsuario.usuario"
+          [value]="selectedUsuario.usuario"
+          disabled
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        />
+        }
+      </div>
+      <label for="roles" class="font-medium text-gray-700">Rol:</label>
+      <select
+        id="roles"
+        name="roles"
+        [(ngModel)]="selectedRole"
+        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+      </select>
+      <div class="field col-12 md:col-4">
+        <label for="forma">Forma</label>
+        <input
+          id="forma"
+          type="text"
+          [value]="selectedUsuario.forma"
+          disabled
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        />
+      </div>
+      <div class="field col-12 md:col-4">
+        <label for="ubicacion">Ubicación</label>
+        <input
+          id="ubicacion"
+          type="text"
+          [value]="selectedUsuario.ubicacion"
+          disabled
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        />
+      </div>
+    </div>
+    <div class="flex items-center justify-between mt-4">
+      <button
+      type="button"
+      class="px-4 py-2 font-semibold text-white bg-yellow-500 rounded-lg shadow-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+      (click)="habilitarEstatus()"
+    >
+    <i class="mr-2 pi pi-user-edit"></i> Habilitar
+    </button>
+
+      <button
+        type="button"
+        class="px-4 py-2 font-semibold text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
+        (click)="guardarReporte()"
+      >
+        <i class="mr-2 pi pi-check"></i> Guardar
+      </button>
+
+
+
+      <button
+        type="button"
+        class="px-4 py-2 font-semibold text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+        (click)="visibleAddDialog = false"
+      >
+        <i class="mr-2 pi pi-times"></i> Cancelar
+      </button>
+    </div>
+    <div class="flex card justify-content-center">
+      <p-toast />
+    </div>
+  </p-dialog>
+  <p-toast
+    [baseZIndex]="10000"
+    [position]="'top-right'"
+    [style]="{ width: '300px' }"
+    [autoZIndex]="true"
+    [life]="3000"
+  />
+</div>
+<!--  -->

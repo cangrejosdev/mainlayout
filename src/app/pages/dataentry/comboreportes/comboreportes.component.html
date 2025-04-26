@@ -1,0 +1,75 @@
+<div class="p-4 bg-gray-100 rounded-lg shadow-lg">
+  <div class="flex items-center space-x-4 field col-12 md:col-4">
+    <label for="roles" class="font-medium text-gray-700">Rol:</label>
+    <select
+      id="roles"
+      name="roles"
+      [(ngModel)]="selectedRole"
+      class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+    </select>
+    <button
+      type="button"
+      class="px-4 py-2 font-semibold text-white bg-orange-500 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
+      (click)="cargarDatosPorRol(selectedRole)"
+    >
+      Cargar
+    </button>
+  </div>
+
+  <!-- Combo para seleccionar un reporte -->
+  <div class="mt-4 field col-12 md:col-4">
+    <label for="correo" class="block mb-2 font-medium text-gray-700">Selecciona un Reporte</label>
+    <select
+      id="reportes"
+      name="reportes"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [(ngModel)]="selectedReporte"
+    >
+    @for (correo of correosUnicos ; track correo) {
+      <option  [value]="correo.Reporte">{{ correo.Reporte }}</option>
+    }
+    </select>
+  </div>
+
+  <!-- Botón para agregar el reporte -->
+  <div class="mt-4">
+    <button
+      type="button"
+      class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+      (click)="agregarReporte()"
+    >
+      Agregar Reporte
+    </button>
+  </div>
+
+  <!-- Tabla para mostrar los reportes agregados -->
+  <div class="mt-6">
+    <h2 class="mb-4 text-lg font-bold text-gray-700">Reportes Agregados</h2>
+    <table class="w-full border border-collapse border-gray-300 table-auto">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="px-4 py-2 text-left border border-gray-300">Rol</th>
+          <th class="px-4 py-2 text-left border border-gray-300">Reporte</th>
+          <th class="px-4 py-2 text-left border border-gray-300">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of reportesAgregados; let i = index" class="hover:bg-gray-100">
+          <td class="px-4 py-2 border border-gray-300">{{ item.rol }}</td>
+          <td class="px-4 py-2 border border-gray-300">{{ item.reporte }}</td>
+          <td class="px-4 py-2 border border-gray-300">
+            <button
+              type="button"
+              class="px-2 py-1 text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
+              (click)="eliminarReporte(i)"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

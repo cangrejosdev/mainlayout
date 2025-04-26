@@ -6,8 +6,13 @@ export interface NavItem {
 }
 
 export const NAVIGATION_ITEMS: NavItem[] = [
-  { label: 'Inicio', icon: 'home', route: '/' },
+
   { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
-  { label: 'Perfil', icon: 'person', route: '/profile' },
-  { label: 'Acerca de', icon: 'info', route: '/about' }
+  { label: 'Crea Usuarios', icon: 'people', route: '/usuariosdataentry' },
+  { label: 'Listado vs Usuarios', icon: 'people', route: '/usuariosreporte' },
+  { label: 'Listado Usuarios', icon: 'people', route: '/usersreporte' },
+  { label: 'Listado de Grupos Procesos PTY', icon: 'group', route: '/listadogrupos' },
+  { label: 'Listado de Reportes', icon: 'people', route: '/listadoreportes' },
+  { label: 'Combo de Reportes', icon: 'people', route: '/comboreportes' },
+
 ];

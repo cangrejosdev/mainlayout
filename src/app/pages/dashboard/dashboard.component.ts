@@ -28,7 +28,7 @@ import { Component } from '@angular/core';
         }
       </div>
 
-      <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 transition-colors duration-300">
+      <!-- <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 transition-colors duration-300">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Reportes</h2>
         <div class="space-y-4">
           @for (item of activities; track item.id) {
@@ -43,7 +43,7 @@ import { Component } from '@angular/core';
             </div>
           }
         </div>
-      </div>
+      </div> -->
     </div>
   `
 })

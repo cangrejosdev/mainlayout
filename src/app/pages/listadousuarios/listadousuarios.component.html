@@ -1,0 +1,109 @@
+<div class="p-6 space-y-4 bg-gray-100 rounded-lg shadow-lg ">
+<div class="p-6 space-y-4 bg-gray-100 rounded-lg shadow-lg ">
+  <p-toolbar class="bg-orange-500">
+    <h1 class="text-gray-500">Listado de Usuarios</h1>
+  </p-toolbar>
+  <p-table
+    styleClass="p-datatable-gridlines"
+    sortMode="multiple"
+    [value]="listaUserService.users()"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="10"
+    [rowHover]="true"
+    dataKey="codigo"
+    [paginator]="false"
+    [scrollable]="true"
+    [rows]="100"
+    scrollHeight="1000px"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">Login</th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">Nombre</th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">Correo</th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">Area</th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">Nivel</th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">Id</th>
+        <th class="text-black border-2 border-gray-100 border-solid">Editar</th>
+        <th class="text-black border-2 border-gray-100 border-solid">Eliminar</th>
+
+      </tr >
+      <tr>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '1.0em'}">
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="login"
+            [showClearButton]="false"
+          />
+        </th>
+
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '1.0em'}">
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="usuario"
+            [showClearButton]="false"
+          />
+        </th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '1.0em'}">
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="mail"
+            [showClearButton]="false"
+          />
+        </th>
+        <th class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '1.0em'}">
+          <p-columnFilter
+            [style]="{ 'text-align': 'center', 'font-size': '1.0em' }"
+            type="text"
+            field="area"
+            [showClearButton]="false"
+          />
+        </th>
+        <th class="text-black border-2 border-gray-100 border-solid"></th>
+        <th class="text-black border-2 border-gray-100 border-solid"></th>
+        <th class="text-black border-2 border-gray-100 border-solid"></th>
+        <th class="text-black border-2 border-gray-100 border-solid"></th>
+
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuarios>
+      <tr>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'justify-left', 'font-size': '0.80em'}">{{usuarios.login}}</td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'justify-left', 'font-size': '0.80em'}">{{usuarios.usuario}}</td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'justify-left', 'font-size': '0.80em'}">{{usuarios.mail}}</td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">{{usuarios.area}}</td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">{{usuarios.nivel}}</td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">{{usuarios.Id}}</td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}" (click)="editar(usuarios.Id)">  <i class="pi-file-edit"></i></td>
+        <td  class="text-black border-2 border-gray-100 border-solid"
+        [style]="{'text-align': 'center', 'font-size': '0.80em'}">  <i class="pi pi-trash"></i></td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <!-- <p-dialog header = "Editar Operador" [(visible)]="displayDialog" [style]="{width: '50vw'}">
+    <app-edit-user [xID] = "xID()"/>
+  </p-dialog> -->
+</div>
+

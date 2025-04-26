@@ -1,0 +1,306 @@
+<!-- user-form.component.html -->
+<div class="max-w-5xl p-6 mx-auto bg-white rounded-lg shadow-md">
+  <h2 class="mb-6 text-2xl font-semibold text-center text-gray-800">
+    Registro de Usuario
+  </h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Distribución en 2 columnas -->
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <!-- Columna 1 -->
+      <div class="space-y-4">
+        <!-- Login -->
+        <div>
+          <label
+            for="login"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Login *</label
+          >
+          <input
+            type="text"
+            id="login"
+            formControlName="login"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            [ngClass]="{
+              'border-red-500':
+                hasError('login', 'required') ||
+                hasError('login', 'minlength') ||
+                hasError('login', 'maxlength')
+            }"
+          />
+          @if (hasError('login', 'required')) {
+          <p class="mt-1 text-sm text-red-600">El login es obligatorio</p>
+          } @if (hasError('login', 'minlength')) {
+          <p class="mt-1 text-sm text-red-600">
+            El login debe tener al menos 4 caracteres
+          </p>
+          } @if (hasError('login', 'maxlength')) {
+          <p class="mt-1 text-sm text-red-600">
+            El login no puede tener más de 20 caracteres
+          </p>
+          }
+        </div>
+
+        <!-- Usuario -->
+        <div>
+          <label
+            for="usuario"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Usuario *</label
+          >
+          <input
+            type="text"
+            id="usuario"
+            formControlName="usuario"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            [ngClass]="{
+              'border-red-500':
+                hasError('usuario', 'required') ||
+                hasError('usuario', 'minlength') ||
+                hasError('usuario', 'maxlength')
+            }"
+          />
+          @if (hasError('usuario', 'required')) {
+          <p class="mt-1 text-sm text-red-600">
+            El nombre de usuario es obligatorio
+          </p>
+          } @if (hasError('usuario', 'minlength')) {
+          <p class="mt-1 text-sm text-red-600">
+            El nombre de usuario debe tener al menos 3 caracteres
+          </p>
+          } @if (hasError('usuario', 'maxlength')) {
+          <p class="mt-1 text-sm text-red-600">
+            El nombre de usuario no puede tener más de 50 caracteres
+          </p>
+          }
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="mail" class="block mb-1 text-sm font-medium text-gray-700"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="mail"
+            formControlName="mail"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            [ngClass]="{ 'border-red-500': hasError('mail', 'email') }"
+          />
+          @if (hasError('mail', 'email')) {
+          <p class="mt-1 text-sm text-red-600">
+            Por favor, introduce un email válido
+          </p>
+          }
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label
+            for="password"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Contraseña *</label
+          >
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+
+          />
+
+        </div>
+
+        <!-- UNG -->
+        <div>
+          <label for="ung" class="block mb-1 text-sm font-medium text-gray-700"
+            >UNG *</label
+          >
+
+          <select
+            formControlName="ung"
+            id="ung"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            [ngClass]="{ 'border-red-500': hasError('ung', 'required') }"
+          >
+            @for (ubica of dts1; track ubica) {
+            <option [value]="ubica.idu">
+              {{ ubica.value }}
+            </option>
+            }
+          </select>
+          @if (hasError('ung', 'required')) {
+          <p class="mt-1 text-sm text-red-600">UNG es obligatorio</p>
+          }
+
+          <!-- <input type="text" id="ung" formControlName="ung"
+                class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                [ngClass]="{'border-red-500': hasError('ung', 'required')}">
+          @if (hasError('ung', 'required')) {
+            <p class="mt-1 text-sm text-red-600">UNG es obligatorio</p>
+          } -->
+        </div>
+      </div>
+
+      <!-- Columna 2 -->
+      <div class="space-y-4">
+        <!-- Área -->
+        <div>
+          <label for="area" class="block mb-1 text-sm font-medium text-gray-700"
+            >Área *</label
+          >
+
+          <select
+            formControlName="area"
+            id="area"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-300"
+            [ngClass]="{ 'border-red-500': hasError('area', 'required') }"
+          >
+            @for (area of dts2; track area) {
+            <option [value]="area.value">
+              {{ area.value }}
+            </option>
+            }
+          </select>
+          @if (hasError('area', 'required')) {
+          <p class="mt-1 text-sm text-red-600">El área es obligatoria</p>
+          }
+        </div>
+
+        <!-- Función -->
+        <div>
+          <label
+            for="funcion"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Función *</label
+          >
+          <input
+            type="text"
+            id="funcion"
+            formControlName="funcion"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-300"
+            [ngClass]="{ 'border-red-500': hasError('funcion', 'required') }"
+          />
+          @if (hasError('funcion', 'required')) {
+          <p class="mt-1 text-sm text-red-600">La función es obligatoria</p>
+          }
+        </div>
+
+        <!-- Grupo -->
+        <div>
+          <label
+            for="grupo"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Grupo</label
+          >
+
+          <select
+            formControlName="grupo"
+            id="grupo"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-300"
+            [ngClass]="{ 'border-red-500': hasError('area', 'required') }"
+          >
+            @for (grupo of dts3; track grupo) {
+            <option [value]="grupo.idg">
+              {{ grupo.value }}
+            </option>
+            }
+          </select>
+          @if (hasError('area', 'required')) {
+          <p class="mt-1 text-sm text-red-600">El Grupo es obligatoria</p>
+          }
+        </div>
+
+        <!-- Nivel de Acceso -->
+        <div>
+          <label
+            for="nivel_acceso"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Nivel de Acceso</label
+          >
+
+          <select
+            formControlName="nivel_acceso"
+            id="nivel_acceso"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-300"
+            [ngClass]="{
+              'border-red-500': hasError('nivel_acceso', 'required')
+            }"
+          >
+            @for (nivel of dts4; track nivel) {
+            <option [value]="nivel.idn">
+              {{ nivel.value }}
+            </option>
+            }
+          </select>
+          @if (hasError('nivel_acceso', 'required')) {
+          <p class="mt-1 text-sm text-red-600">El Nivel es obligatoria</p>
+          }
+        </div>
+
+        <!-- Terminal -->
+        <div>
+          <label
+            for="terminal"
+            class="block mb-1 text-sm font-medium text-gray-700"
+            >Terminal</label
+          >
+
+          <select
+            formControlName="terminal"
+            id="terminal"
+            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            [ngClass]="{ 'border-red-500': hasError('terminal', 'required') }"
+          >
+            @for (ubica of dts1; track ubica) {
+            <option [value]="ubica.idu">
+              {{ ubica.value }}
+            </option>
+            }
+          </select>
+          @if (hasError('terminal', 'required')) {
+          <p class="mt-1 text-sm text-red-600">Terminal es obligatorio</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Observaciones (ancho completo) -->
+    <div>
+      <label
+        for="observaciones"
+        class="block mb-1 text-sm font-medium text-gray-700"
+        >Observaciones</label
+      >
+      <textarea
+        id="observaciones"
+        formControlName="observaciones"
+        class="w-full h-32 px-3 py-2 border rounded-md shadow-sm resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        [ngClass]="{ 'border-red-500': hasError('observaciones', 'maxlength') }"
+      ></textarea>
+      @if (hasError('observaciones', 'maxlength')) {
+      <p class="mt-1 text-sm text-red-600">
+        Las observaciones no pueden exceder los 500 caracteres
+      </p>
+      }
+    </div>
+
+    <!-- Botones -->
+    <div class="flex justify-end pt-4 space-x-4 border-t border-gray-200">
+      <button
+        type="button"
+        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        (click)="userForm.reset(); submitted = false"
+      >
+        Limpiar
+      </button>
+      <button
+        type="submit"
+        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+
+</div>
