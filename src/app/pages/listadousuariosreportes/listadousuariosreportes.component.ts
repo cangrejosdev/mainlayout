@@ -94,6 +94,10 @@ async habilitarEstatus()
 {
 console.log('Habilitando el estatus...',this.habilitaStatus());
  this.habilitaStatus.set(!this.habilitaStatus());
+ this.selectedUsuario.usuario =''
+ this.selectedUsuario.forma = '';
+ this.selectedUsuario.ubicacion = '';
+
 }
 guardarReporte(): void {
   console.log('Guardando el reporte...',this.selectedRole);
@@ -144,6 +148,18 @@ onReporteChange(event: Event): void {
     this.selectedReporte.set(value); // Actualizamos la señal con el valor seleccionado
   } else {
     console.warn('No se seleccionó ningún valor en el select.');
+  }
+}
+validarUbicacion(event: KeyboardEvent): void {
+  const inputChar = String.fromCharCode(event.keyCode);
+  if (!/^[1-5]$/.test(inputChar)) {
+    event.preventDefault(); // Evita que se ingrese un valor no válido
+  }
+}
+validarForma(event: KeyboardEvent): void {
+  const inputChar = String.fromCharCode(event.keyCode).toUpperCase(); // Convertir a mayúsculas
+  if (!/^[TC]$/.test(inputChar)) {
+    event.preventDefault(); // Evita que se ingrese un valor no válido
   }
 }
 }

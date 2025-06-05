@@ -215,6 +215,27 @@
           [(ngModel)]="selectedUsuario.usuario"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg"
         />
+        <div class="field col-12 md:col-4">
+          <label for="forma">Forma</label>
+          <input
+          id="forma"
+          type="text"
+          [(ngModel)]="selectedUsuario.forma"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          (keypress)="validarForma($event)"
+        />
+        </div>
+        <div class="field col-12 md:col-4">
+          <label for="ubicacion">Ubicación</label>
+          <input
+          id="ubicacion"
+          type="text"
+          [(ngModel)]="selectedUsuario.ubicacion"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          pattern="[1-5]"
+          (keypress)="validarUbicacion($event)"
+        />
+        </div>
         } @else {
         <label for="usuario">Usuario</label>
         <input
@@ -227,6 +248,26 @@
           disabled
           class="w-full px-4 py-2 border border-gray-300 rounded-lg"
         />
+        <div class="field col-12 md:col-4">
+          <label for="forma">Forma</label>
+          <input
+            id="forma"
+            type="text"
+            [value]="selectedUsuario.forma"
+            disabled
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+        <div class="field col-12 md:col-4">
+          <label for="ubicacion">Ubicación</label>
+          <input
+            id="ubicacion"
+            type="text"
+            [value]="selectedUsuario.ubicacion"
+            disabled
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
         }
       </div>
       <label for="roles" class="font-medium text-gray-700">Rol:</label>
@@ -238,26 +279,7 @@
       >
         <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
       </select>
-      <div class="field col-12 md:col-4">
-        <label for="forma">Forma</label>
-        <input
-          id="forma"
-          type="text"
-          [value]="selectedUsuario.forma"
-          disabled
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-        />
-      </div>
-      <div class="field col-12 md:col-4">
-        <label for="ubicacion">Ubicación</label>
-        <input
-          id="ubicacion"
-          type="text"
-          [value]="selectedUsuario.ubicacion"
-          disabled
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-        />
-      </div>
+
     </div>
     <div class="flex items-center justify-between mt-4">
       <button
@@ -265,7 +287,7 @@
       class="px-4 py-2 font-semibold text-white bg-yellow-500 rounded-lg shadow-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
       (click)="habilitarEstatus()"
     >
-    <i class="mr-2 pi pi-user-edit"></i> Habilitar
+    <i class="mr-2 pi pi-user-edit"></i> Nuevo
     </button>
 
       <button

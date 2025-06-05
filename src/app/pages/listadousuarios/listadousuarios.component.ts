@@ -10,7 +10,8 @@ import { UsersService } from '../../services/users.service';
 import { UserData } from '../../interfaces/usersdata';
 import { Router, RouterLink } from '@angular/router';
 import { DialogModule } from 'primeng/dialog';
-
+import { environment } from '../../../environments/environment';
+import Swal from 'sweetalert2';
 import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
@@ -35,6 +36,36 @@ export class ListadousuariosComponent {
   editar(id: string) {
     this.xID.set(id);
     this.router.navigate(['/edit-user', this.xID()]);
+  }
+  eliminar(id: string, user: string) {
+    // Construir la URL para el fetch
+    const accion = 'D';
+    const url = `${environment.url}/user134/${id}/${user}`;
+
+    // Realizar la solicitud fetch
+    fetch(url, {
+      method: 'GET',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Error al eliminar el usuario: ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('usuario eliminado exitosamente en el servidor:', data);
+        Swal.fire({
+          title: 'Good job!',
+          text: 'Registro eliminado exitosamente',
+          icon: 'success',
+        });
+        this.listaUserService.getlistUsers();
+      })
+      .catch((error) => {
+        console.error('Error al eliminar el usuario:', error);
+      });
   }
 
   closeDialog() {
