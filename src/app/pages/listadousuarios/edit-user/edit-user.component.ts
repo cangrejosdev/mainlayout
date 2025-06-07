@@ -16,8 +16,8 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { SingleUserService } from '../../../services/singleUser.service'; // Asegúrate de importar tu servicio de usuario
 import { ChangeDetectorRef } from '@angular/core';
+import { SingleUserService } from '../../../services/singleUser.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -30,14 +30,13 @@ export class EditUserComponent implements OnInit {
   userId!: string;
   userid = signal<string>('');
   user: UserData[] = [];
-
+  public singleUserService = inject(SingleUserService);
   xID = signal<string>('');
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
-    public singleUserService: SingleUserService
+    private router: Router
   ) {
     this.initForm();
   }
@@ -85,6 +84,7 @@ export class EditUserComponent implements OnInit {
           ),
         ],
       ],
+      terminal: ['', [Validators.required]],
     });
   }
 
@@ -99,18 +99,18 @@ export class EditUserComponent implements OnInit {
         usuario: user.usuario,
         mail: user.mail,
         area: user.area,
-        nivel_acceso: user.nivel_acceso,
+        nivel: user.nivel_acceso,
         password: user.password,
-
+        terminal: user.terminal,
       });
     } else {
       console.error('Usuario no encontrado');
     }
+    console.log('User Data:', this.singleUserService.users());
   }
 
   onSubmit(): void {
     if (this.editUserForm.valid) {
-      //this.userService.updateUser(this.userId, this.editUserForm.value).subscribe(() => {
       this.router.navigate(['/listado-usuarios']);
       // });
     }

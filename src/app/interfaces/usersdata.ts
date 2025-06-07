@@ -7,8 +7,8 @@ export interface UserData {
   area: string;
   funcion: string;
   observaciones: string;
-  grupo: string | null;
-  nivel_acceso: string | null;
-  terminal: string | null;
+  grupo: string ;
+  nivel_acceso: string ;
+  terminal: string ;
   Id: number
 }

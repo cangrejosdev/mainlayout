@@ -74,4 +74,37 @@ export class SingleUserService {
       });
     }
   }
+
+
+
+  // async updateUser(user: UserData): Promise<any> {
+  //   const params = [
+  //     `Id=${encodeURIComponent(user.Id)}`,
+  //     `login=${encodeURIComponent(user.login)}`,
+  //     `usuario=${encodeURIComponent(user.usuario)}`,
+  //     `mail=${encodeURIComponent(user.mail)}`,
+  //     `password=${encodeURIComponent(user.password)}`,
+  //     `ung=${encodeURIComponent(user.ung)}`,
+  //     `area=${encodeURIComponent(user.area)}`,
+  //     `funcion=${encodeURIComponent(user.funcion)}`,
+  //     `observaciones=${encodeURIComponent(user.observaciones)}`,
+  //     `grupo=${encodeURIComponent(user.grupo)}`,
+  //     `nivel_acceso=${encodeURIComponent(user.nivel_acceso)}`,
+  //     `terminal=${encodeURIComponent(user.terminal)}`
+  //   ].join('&');
+
+  //   const url = `${environment.url}/user127?${params}`;
+  //   try {
+  //     const response = await fetch(url);
+  //     if (!response.ok) {
+  //       throw new Error(`Error al actualizar el usuario: ${response.statusText}`);
+  //     }
+  //     const data = await response.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.error('Error al actualizar el usuario:', error);
+  //     throw error;
+  //   }
+  // }
+
 }

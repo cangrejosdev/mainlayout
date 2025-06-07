@@ -60,6 +60,7 @@ export class UsersService {
             nivel_acceso: item.nivel_acceso,
             terminal: item.terminal,
             Id: item.Id,
+            ubicacion: item.ubicacion, // Asegúrate de que 'ubicacion' esté presente en la respuesta
           };
         }),
       });
@@ -94,6 +95,7 @@ export class UsersService {
           nivel_acceso: item.nivel_acceso,
           terminal: item.terminal,
           Id: item.Id,
+       // Asegúrate de que 'ubicacion' esté presente en la respuesta
         })),
       });
 
