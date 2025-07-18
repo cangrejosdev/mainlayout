@@ -1,0 +1,163 @@
+<div class="p-6 space-y-4 bg-gray-100 rounded-lg shadow-lg">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-gray-800">Lista de Firmantes</h1>
+    <div class="space-x-2">
+      <button
+        (click)="abrirModalAgregar()"
+        class="px-4 py-2 text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+      >
+        Agregar Firmante
+      </button>
+      <button
+        (click)="recargarFirmantes()"
+        class="px-4 py-2 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+        Recargar
+      </button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="flex items-center justify-center py-8">
+      <div class="text-lg text-gray-600">Cargando firmantes...</div>
+    </div>
+  } @else {
+    <div class="overflow-x-auto">
+      <table class="w-full border border-collapse border-gray-300 table-auto">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="px-4 py-2 text-left border border-gray-300">Cédula</th>
+            <th class="px-4 py-2 text-left border border-gray-300">Nombres</th>
+            <th class="px-4 py-2 text-left border border-gray-300">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (firmante of firmantes(); track firmante.cedula) {
+            <tr class="hover:bg-gray-100">
+              <td class="px-4 py-2 border border-gray-300">{{ firmante.cedula }}</td>
+              <td class="px-4 py-2 border border-gray-300">{{ firmante.nombres }}</td>
+              <td class="px-4 py-2 border border-gray-300">
+                <button
+                  (click)="editarFirmante(firmante)"
+                  class="px-2 py-1 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                >
+                  Editar
+                </button>
+                <button
+                  (click)="eliminarFirmante(firmante)"
+                  class="px-2 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="px-4 py-8 text-center text-gray-500">
+                No se encontraron firmantes
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <!-- Modal de Agregar -->
+  @if (showAddModal()) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        <h2 class="mb-4 text-xl font-bold text-gray-800">Agregar Firmante</h2>
+
+        <div class="space-y-4">
+          <div>
+            <label for="add-cedula" class="block text-sm font-medium text-gray-700">Cédula</label>
+            <input
+              id="add-cedula"
+              type="text"
+              [value]="addForm().cedula"
+              (input)="updateAddForm('cedula', $any($event.target).value)"
+              class="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Ingrese la cédula"
+            />
+          </div>
+
+          <div>
+            <label for="add-nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
+            <input
+              id="add-nombres"
+              type="text"
+              [value]="addForm().nombres"
+              (input)="updateAddForm('nombres', $any($event.target).value)"
+              class="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Ingrese los nombres"
+            />
+          </div>
+        </div>
+
+        <div class="flex justify-end mt-6 space-x-2">
+          <button
+            (click)="cancelarAgregar()"
+            class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Cancelar
+          </button>
+          <button
+            (click)="agregarFirmante()"
+            class="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
+          >
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Modal de Edición -->
+  @if (showEditModal()) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+        <h2 class="mb-4 text-xl font-bold text-gray-800">Editar Firmante</h2>
+
+        <div class="space-y-4">
+          <div>
+            <label for="edit-cedula" class="block text-sm font-medium text-gray-700">Cédula</label>
+            <input
+              id="edit-cedula"
+              type="text"
+              [value]="editForm().cedula"
+              (input)="updateEditForm('cedula', $any($event.target).value)"
+              class="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label for="edit-nombres" class="block text-sm font-medium text-gray-700">Nombres</label>
+            <input
+              id="edit-nombres"
+              type="text"
+              [value]="editForm().nombres"
+              (input)="updateEditForm('nombres', $any($event.target).value)"
+              class="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
+        <div class="flex justify-end mt-6 space-x-2">
+          <button
+            (click)="cancelarEdicion()"
+            class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Cancelar
+          </button>
+          <button
+            (click)="guardarEdicion()"
+            class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

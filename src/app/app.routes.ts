@@ -13,6 +13,7 @@ import { EditUserComponent } from './pages/listadousuarios/edit-user/edit-user.c
 import { ListadogruposComponent } from './pages/listadogrupos/listadogrupos.component';
 import { ListadoReportesComponent } from './pages/listadoreportes/listadoreportes.component';
 import { ComboreportesComponent } from './pages/dataentry/comboreportes/comboreportes.component';
+import { ListFirmantesComponent } from './pages/listafirmantes/listafirmantes.component';
 export const routes: Routes = [
   {
     path: '',
@@ -29,6 +30,7 @@ export const routes: Routes = [
       { path: 'listadogrupos', component: ListadogruposComponent },
       { path: 'listadoreportes', component: ListadoReportesComponent },
       { path : 'comboreportes', component : ComboreportesComponent},
+      { path: 'firmantes', component: ListFirmantesComponent },
       { path: '**', redirectTo: '' }
     ]
   }

@@ -111,6 +111,20 @@ export class EditUserComponent implements OnInit {
 
   onSubmit(): void {
     if (this.editUserForm.valid) {
+      const updatedUser: UserData = {
+        login: this.editUserForm.value.login,
+        usuario: this.editUserForm.value.usuario,
+        mail: this.editUserForm.value.mail,
+        password: this.editUserForm.value.password,
+        ung: this.editUserForm.value.terminal,
+        terminal: this.editUserForm.value.terminal,
+        Id: parseInt(this.userId, 10),
+        area: '',
+        funcion: '',
+        observaciones: '',
+        grupo: '',
+        nivel_acceso: ''
+      };
       this.router.navigate(['/listado-usuarios']);
       // });
     }
